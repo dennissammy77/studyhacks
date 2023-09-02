@@ -1,2 +1,2 @@
-SECRET_KEY = 'your_secret_key'
+SECRET_KEY = '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'
 DEBUG = True
