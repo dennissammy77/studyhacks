@@ -8,7 +8,7 @@ db = client["studyhacks"]
 collection = db["chats"]
 @app.route('/')
 def index():
-    return "hello world"
+    return "<h1> hello world</h1>"
 
 
 # Create a new chat
