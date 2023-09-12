@@ -6,6 +6,10 @@ app = Flask(__name__)
 client = MongoClient("mongodb+srv://userxyz:userxyz@cluster0.5be8y.mongodb.net/?retryWrites=true&w=majority")  # Update with your MongoDB URI
 db = client["studyhacks"]
 collection = db["chats"]
+@app.route('/')
+def index():
+    return "hello world"
+
 
 # Create a new chat
 @app.route("/chats", methods=["POST"])
