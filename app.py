@@ -31,14 +31,16 @@ def get_chats():
     return jsonify(chats), 200
 
 
-# Get a specific chat by ID
 @app.route("/chats/<string:chat_id>", methods=["GET"])
 def get_chat(chat_id):
     chat = collection.find_one({"_id": ObjectId(chat_id)})
     if chat:
+        # Convert ObjectId to string
+        chat["_id"] = str(chat["_id"])
         return jsonify({"chat": chat}), 200
     else:
         return jsonify({"message": "Chat not found"}), 404
+
 
 
 # Update a chat by ID
