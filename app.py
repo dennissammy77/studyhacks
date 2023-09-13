@@ -19,11 +19,17 @@ def create_chat():
     chat_id = collection.insert_one(data).inserted_id
     return jsonify({"message": "Chat created successfully", "chat_id": str(chat_id)}), 201
 
-# Get all chats
+
 @app.route("/chats", methods=["GET"])
 def get_chats():
     chats = list(collection.find())
-    return  chats, 200
+    
+    # Convert ObjectId fields to strings
+    for chat in chats:
+        chat["_id"] = str(chat["_id"])
+    
+    return jsonify(chats), 200
+
 
 # Get a specific chat by ID
 @app.route("/chats/<string:chat_id>", methods=["GET"])
@@ -33,6 +39,7 @@ def get_chat(chat_id):
         return jsonify({"chat": chat}), 200
     else:
         return jsonify({"message": "Chat not found"}), 404
+
 
 # Update a chat by ID
 @app.route("/chats/<string:chat_id>", methods=["PUT"])
